@@ -1,19 +1,28 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <math.h>
 int main()
 {
-	int n;
-	while (~scanf("%d", &n))
-	{
-		double sum = 0;
-		double min = 1000, max = 0, s[105];
-		for (int i = 0; i < n; i++)
-		{
-			scanf("%lf", &s[i]);
-			sum = sum + s[i];
-			if (s[i] > max)max = s[i];
-			if (s[i] < min)min = s[i];
+	int m, n, x, y, i;
+	while (scanf("%d%d", &m, &n) != EOF) {
+		x = 0, y = 0;
+		if (m < n) {
+			for (i = m; i <= n; i++) {
+				if (i % 2 == 0)x += i * i;
+				else y += i * i * i;
+			}
 		}
-		printf("%.2lf\n", (sum - max - min) / (n - 2));
+		else if (m == n) {
+			if (m % 2 != 0)x = 0, y = m * m * m;
+			else x = m * m, y = 0;
+		}
+		else {
+			for (i = m; i >= n; i--) {
+				if (i % 2 == 0)x += i * i;
+				else y += i * i * i;
+			}
+		}
+
+		printf("%d %d\n", x, y);
 	}
 	return 0;
 }
